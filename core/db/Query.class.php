@@ -29,8 +29,8 @@ class Query {
 	protected $returnType = 1;
 
 	function __construct($table, $tableAs = 't') {
-		if (isset($GLOBALS['__JPrass_db__']) && $GLOBALS['__JPrass_db__']) {
-			$this->link = $GLOBALS['__JPrass_db__'];
+		if (isset($GLOBALS['__JPrass_db_link__']) && $GLOBALS['__JPrass_db_link__']) {
+			$this->link = $GLOBALS['__JPrass_db_link__'];
 		} else {
 			$config = JPrassApi::C("db");
 
@@ -38,7 +38,7 @@ class Query {
 				JPrassApi::dump(array("数据库配置" => JPrassApi::C("db")));
 			}
 
-			$this->link = $GLOBALS['__JPrass_db__'] = Mysql::connect($config);
+			$this->link = $GLOBALS['__JPrass_db_link__'] = Mysql::connect($config);
 		}
 
 
@@ -277,7 +277,7 @@ class Query {
 		$sql = empty($sql) ? $this->sql : $sql;
 		$link = is_null($link) ? $this->link : $link;
 
-		$result = mysql_query(str_replace("##_", JPrassApi::C("db.prefix"), $sql), $link);
+		$result = mysql_query(str_replace("#_", JPrassApi::C("db.prefix"), $sql), $link);
 
 		if (JPrassApi::C("dumpSql")) {
 			JPrassApi::dump(array("SQL语句" => $sql));
@@ -388,14 +388,6 @@ class Query {
 	}
 
 	//---------------------- 华丽分割线 ------------------------
-	//自动加载函数, 实现特殊操作
-	public function __call($func, $args) {
-		if (in_array($func, array('field', 'where', 'order', 'group', 'having'))) {
-			$this->options[$func] = array_shift($args);
-			return $this;
-		}
-	}
-
 	public function join($table, $on) {
 		$this->options['join'] = "`{$table}` on {$on}";
 		return $this;
@@ -406,13 +398,43 @@ class Query {
 		return $this;
 	}
 
-//	public function table($table, $as = 't') {
-//
-//		$this->options['table'] = $table;
-//		$this->table = $this->options['table'];
-//		$this->options['as'] = !empty($as) ? $as : "t";
-//		return $this;
-//	}
+	public function field($field) {
+		$this->options['field'] = $field;
+		return $this;
+	}
+
+	public function where($where) {
+		if (is_string($where)) {
+			$this->options['where'] = $where;
+		} else {
+			$this->options['where'] = "";
+			foreach ($where as $key => $value) {
+				if (isset($this->options['where']) && !empty($this->options['where'])) {
+					$this->options['where'] .= ' and ';
+				} else {
+					$this->options['where'] = "";
+				}
+				$this->options['where'] .= $key . "='" . $value . "' ";
+			}
+		}
+		return $this;
+	}
+
+	public function group($group) {
+		$this->options['group'] = $group;
+		return $this;
+	}
+
+	public function order($order) {
+		$this->options['order'] = $order;
+		return $this;
+	}
+
+	public function having($having) {
+		$this->options['having'] = $having;
+		return $this;
+	}
+
 	//返回上一次操作所影响的行数
 	public function affectedRows($link = null) {
 		$link = is_null($link) ? $this->link : $link;

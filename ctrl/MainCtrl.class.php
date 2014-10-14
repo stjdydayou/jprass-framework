@@ -1,4 +1,5 @@
 <?php
+
 /**
  * JPrass framework
  * @copyright  Copyright (c) 2013 www.jprass.com
@@ -8,12 +9,14 @@
  * @QQ			97142822
  * @version    1.0
  */
-
 class MainCtrl extends BaseCtrl {
 
 	public function index() {
+		$query = new Query("#_role","t");
+		$list = $query->findAll();
 		return "main";
 	}
+
 }
 
 ?>

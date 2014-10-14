@@ -14,16 +14,17 @@
 require_once "./JPrass.php";
 
 try {
-    //初始化一个请求
-    $request = new HttpRequest();
-
-    //创建主体对象
-    $JPrass = new JPrassRun($request);
-
-    //执行主方法
-    $JPrass->run();
+	//初始化一个请求
+	$request = new HttpRequest();
+	
+	//创建主体对象
+	$JPrass = new JPrassRun($request);
+	
+	//执行主方法
+	$JPrass->run();
+	
 } catch (Exception $exp) {
-
-    //对异常的处理
-    JPrassApi::handlerException($exp);
+	
+	//对异常的处理
+	JPrassApi::handlerException($exp);
 }

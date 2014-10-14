@@ -16,9 +16,9 @@ return array
 	"db" => array(// 数据库连接配置
 		"host" => "localhost", // 数据库地址
 		"port" => 3306, // 端口
-		"user" => "user", // 用户名
-		"pwd" => "pwd", // 密码
-		"database" => "database", //库名称
+		"user" => "root", // 用户名
+		"pwd" => "123456", // 密码
+		"database" => "gaofen8", //库名称
 		"prefix" => "db_", //表前缀
 		"characterSet" => "utf8", //编码格式
 		"pconnect" => false
@@ -37,8 +37,9 @@ return array
 		'right_delimiter' => '}>', // smarty右限定符
 		'auto_literal' => true, // 忽略Smarty的左右限定符周围的空格
 		'debugging' => false, //是否开启调试窗口
-		'caching' => false, ////开启缓存，为flase的时候缓存无效
-		'cache_lifetime' => 3600 //缓存生命同期,单位秒
+		'caching' => false, //开启缓存，为flase的时候缓存无效
+		'cache_lifetime' => 3600, //缓存生命同期,单位秒
+		'tpl_suffix' => ".tpl", //smarty模板文件的后缀名
 	),
 	"auto_session" => true, //是否自动开启SESSION支持
 	"Debug" => false, //是否开启调试模式
