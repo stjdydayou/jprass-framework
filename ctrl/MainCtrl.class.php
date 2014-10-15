@@ -11,11 +11,11 @@
  */
 class MainCtrl extends BaseCtrl {
 
-	public function index() {
-		$query = new Query("#_role","t");
-		$list = $query->findAll();
-		return "main";
-	}
+    public function index() {
+        //$query = new Query("#_role","t");
+        //$list = $query->findAll();
+        return "main";
+    }
 
 }
 

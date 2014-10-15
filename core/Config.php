@@ -18,7 +18,7 @@ return array
 		"port" => 3306, // 端口
 		"user" => "root", // 用户名
 		"pwd" => "123456", // 密码
-		"database" => "gaofen8", //库名称
+		"database" => "test", //库名称
 		"prefix" => "db_", //表前缀
 		"characterSet" => "utf8", //编码格式
 		"pconnect" => false
