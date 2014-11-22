@@ -10,7 +10,8 @@
  * @QQ			97142822
  * @version    1.0
  */
-if (!defined('__JPRASS_CORE_DIR__')) exit('request error');
+if (!defined('__JPRASS_CORE_DIR__'))
+	exit('request error');
 return array
 	(
 	"db" => array(// 数据库连接配置
@@ -41,6 +42,7 @@ return array
 		'cache_lifetime' => 3600, //缓存生命同期,单位秒
 		'tpl_suffix' => ".tpl", //smarty模板文件的后缀名
 	),
+	"default_timezone" => 8, //时区设置
 	"auto_session" => true, //是否自动开启SESSION支持
 	"Debug" => false, //是否开启调试模式
 	"dumpSql" => false, //是否自动输出执行过的SQL语句
